@@ -1,0 +1,12 @@
+.old {
+  background-color: red;
+}
+
+.new {
+  background-color: yellow;
+}
+
+article {
+  border: 1px solid #000;
+  background-color: #f26522;
+}
