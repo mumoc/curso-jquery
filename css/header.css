@@ -1,9 +1,0 @@
-ul.menu-principal li {
-  display: inline-block;
-}
-
-ul.menu-principal li:after {
-  content: '|';
-  padding: 0 10px;
-}
-
