@@ -14,6 +14,7 @@
   </header>
 
   <section>
+    <a href='#' id='newTask' title='Anade un nuevo USUARIO?'>Add new</a>
     <div id='error'></div>
     <ul id='tasks'>
 
@@ -32,7 +33,7 @@
     </table>
   </section>
 
-  <aside>
+  <aside class='hidden' id='dialog'>
     <form id='formTask' action='http://curso-api.herokuapp.com/tasks' method='POST'>
       <input type='text' id='task-title' name='task[title]' placeholder='title' title='This is the task title'/>
       <input type='text' id='task-content' name='task[content]' placeholder='content' title='This is the task content'/>
@@ -51,12 +52,12 @@
 
 
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-<script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
-<script src='js/utils/request_handler.js'></script>
-<script src='js/resources/tasks.js'></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 
 <script>
 $(document).ready(function(){
+  $( document ).tooltip();
+  $('#dialog').dialog({ autoOpen: false, modal: true });
     var request = $.ajax('http://curso-api.herokuapp.com/tasks.json', { dataType: 'jsonp'});
     request.success(function(tasks){
       var tableBody = $('#tasks-table > tbody');
@@ -85,6 +86,7 @@ $(document).ready(function(){
        tr.html('<td>' + task.title + '</td><td>' + task.content+ '</td><td><a href="#" class="delete">Del</a></td>');
        tableBody.append(tr);
        tr.fadeIn(3000);
+       $('#dialog').dialog('close');
     });
   });
 
@@ -100,6 +102,11 @@ $(document).ready(function(){
       });
     });
 
+  });
+
+  $('#newTask').on('click', function(e){
+    e.preventDefault();
+    $('#dialog').dialog('open');
   });
 });
 </script>
