@@ -20,13 +20,19 @@
 
   <aside>
     <form action='http://curso-api.herokuapp.com/tasks' method='POST'>
-      <input type='text' name='task[title]' placeholder='title'/>
-      <input type='text' name='task[content]' placeholder='content' />
+      <input type='text' id='task-title' name='task[title]' placeholder='title' title='This is the task title'/>
+      <input type='text' id='task-content' name='task[content]' placeholder='content' title='This is the task content'/>
       <input type='submit' value='Send' />
     </form>
   </aside>
 
-  <footer>Copyright 2013 </footer>
+  <footer>
+    <nav id='footer-nav'>
+      <a href='curso.html'>Home</a>
+      <a href='terminos.html'>Terminos y Condiciones</a>
+    </nav>
+    <span>Copyright 2013</span>
+  </footer>
 </div>
 
 
@@ -34,6 +40,13 @@
 <script src='http://code.jquery.com/ui/1.10.3/jquery-ui.js'></script>
 <script src='js/utils/request_handler.js'></script>
 <script src='js/resources/tasks.js'></script>
+
+<script>
+  $(document).ready(function(){
+    <!--$(document).tooltip();-->
+    <!--$('#task-title').datepicker();-->
+  });
+</script>
 
 </body>
 </html>

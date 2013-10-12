@@ -1,7 +1,8 @@
 .hidden { display: none }
 
 #principal {
-  width: 900px;
+  min-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
 }
 section {
