@@ -9,19 +9,22 @@
   <header>
     <h1>Jquery: 2da vuelta xD</h1>
   </header>
+
   <section>
     <div id='error'></div>
     <ul id='tasks'>
     </ul>
   </section>
+
+  <aside>
+    <form action='http://curso-api.herokuapp.com/tasks' method='POST'>
+      <input type='text' name='task[title]' />
+      <input type='text' name='task[content]' />
+      <input type='submit' value='Send' />
+    </form>
+  </aside>
+
   <footer>Copyright 2013 </footer>
-
-  <form action='http://curso-api.herokuapp.com/tasks' method='POST'>
-    <input type='text' name='task[title]' />
-    <input type='text' name='task[content]' />
-    <input type='submit' value='Send' />
-  </form>
-
 </div>
 
 

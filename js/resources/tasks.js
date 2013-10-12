@@ -21,8 +21,17 @@ Course.Resources.Tasks = (function(){
   };
 
   Tasks.prototype.create = function(data){
-    data = { task: { title: '123', content: '456' } }
+    data = data || { task: { title: '123', content: '456' } };
     request = this.Handler.create(data);
+  };
+
+  Tasks.prototype.update = function(data){
+    data = data || { task: { id: '1', title: 'Do Laundry', content: 'For Gods Sake' } };
+    request = this.Handler.update(data);
+  };
+
+  Tasks.prototype.destroy = function(id){
+    request = this.Handler.destroy(id);
   };
 
   Tasks.prototype.renderAll = function(tasks){
@@ -31,7 +40,7 @@ Course.Resources.Tasks = (function(){
   };
 
   Tasks.prototype.renderOne = function(task, index, tasks){
-    var newLi = $('<li></li>');
+    var newLi = $('<li>', { id: task.id }).html(task.title);
     _this.taskList.append(newLi);
   };
 

@@ -31,20 +31,33 @@ Course.Utils.RequestHandler = (function(){
     return request;
   };
 
+  RequestHandler.prototype.update = function(data) {
+    data._method = 'PUT';
+    var request = $.post(this.baseUrl + this.resourceUrl + '/' + data.id + '.json', data);
+    this.addCallbacks(request);
+    return request;
+  };
+
+  RequestHandler.prototype.destroy = function(id) {
+    data = { '_method': 'DELETE'};
+    var request = $.post(this.baseUrl + this.resourceUrl + '/' + id + '.json', data);
+    this.addCallbacks(request);
+    return request;
+  };
+
   RequestHandler.prototype.addCallbacks = function(request) {
     request.done(this.successCallback);
     request.fail(this.errorCallback);
   };
 
   RequestHandler.prototype.successCallback = function(data, status, jqXHR) {
-    window.data = jqXHR;
     console.log('Response was successfull');
     window.successResponseData = data;
   };
 
   RequestHandler.prototype.errorCallback = function(jqXHR, status, error) {
     console.log('Response thrown an error');
-    window.errorResponseData = data;
+    window.errorResponseData = jqXHR;
   };
 
   return RequestHandler;
