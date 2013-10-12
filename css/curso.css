@@ -1,12 +1,20 @@
-.old {
-  background-color: red;
+.hidden { display: none }
+
+#principal {
+  width: 900px;
+  margin: 0 auto;
+}
+section {
+  width: 80%;
+  float: left;
+  min-height: 500px;
 }
 
-.new {
-  background-color: yellow;
+aside {
+  width: 20%;
+  float: right;
 }
 
-article {
-  border: 1px solid #000;
-  background-color: #f26522;
+footer {
+  clear: both;
 }
