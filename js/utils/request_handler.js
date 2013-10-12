@@ -7,7 +7,7 @@ Course.Utils.RequestHandler = (function(){
     this.resourceUrl = resource;
   }
 
-  RequestHandler.prototype.baseUrl = false ? 'http://curso-api.herokuapp.com/' : 'http://api.dev/';
+  RequestHandler.prototype.baseUrl = true ? 'http://curso-api.herokuapp.com/' : 'http://api.dev/';
 
   RequestHandler.prototype.resourceUrl = null;
 

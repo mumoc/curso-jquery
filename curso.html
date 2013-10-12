@@ -7,26 +7,40 @@
 
 </head>
 <body>
-<div id='principal'>
+<div id='principal' class='principal'>
   <header>
     <h1>jQuery: 2da vuelta xD</h1>
+    <a href='#footer'>Go footer</a>
   </header>
 
   <section>
     <div id='error'></div>
     <ul id='tasks'>
+
     </ul>
+
+    <a id='consultar' href='#'>Consultar</a>
+    <table id='tasks-table'>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Content</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </section>
 
   <aside>
-    <form action='http://curso-api.herokuapp.com/tasks' method='POST'>
+    <form id='formTask' action='http://curso-api.herokuapp.com/tasks' method='POST'>
       <input type='text' id='task-title' name='task[title]' placeholder='title' title='This is the task title'/>
       <input type='text' id='task-content' name='task[content]' placeholder='content' title='This is the task content'/>
-      <input type='submit' value='Send' />
+      <input id='createTask' type='submit' value='Send' />
     </form>
   </aside>
 
-  <footer>
+  <footer id='footer'>
     <nav id='footer-nav'>
       <a href='curso.html'>Home</a>
       <a href='terminos.html'>Terminos y Condiciones</a>
@@ -42,12 +56,53 @@
 <script src='js/resources/tasks.js'></script>
 
 <script>
-  $(document).ready(function(){
-    <!--$(document).tooltip();-->
-    <!--$('#task-title').datepicker();-->
+$(document).ready(function(){
+    var request = $.ajax('http://curso-api.herokuapp.com/tasks.json', { dataType: 'jsonp'});
+    request.success(function(tasks){
+      var tableBody = $('#tasks-table > tbody');
+      tableBody.html('');
+      tasks.forEach(function(task, index, tasks){
+        var tr = $('<tr>', { id: task.id });
+        tr.html('<td>' + task.title + '</td><td>' + task.content+ '</td><td><a href="#" class="delete">Del</a></td>');
+        tableBody.append(tr);
+      });
+    });
+
+
+  $('#formTask').on('submit', function(e){
+    e.preventDefault();
+    var action = $(e.target).attr('action')
+    var data = { task: {} };
+    data.task.title = $('#task-title').val();
+    data.task.content = $('#task-content').val();
+
+    var request = $.post(action + '.json', data);
+    request.success(function(task){
+       var tableBody = $('#tasks-table > tbody');
+       console.log(task);
+       var tr = $('<tr>', { class: 'hidden', id: task.id });
+       <!--tr.attr('id', task.id);-->
+       tr.html('<td>' + task.title + '</td><td>' + task.content+ '</td><td><a href="#" class="delete">Del</a></td>');
+       tableBody.append(tr);
+       tr.fadeIn(3000);
+    });
   });
+
+  $('#tasks-table').on('click', 'a.delete', function(e){
+    e.preventDefault();
+
+    var id = $(e.target).parents('tr').attr('id');
+    data = { _method: 'DELETE' }
+    var request = $.post('http://curso-api.herokuapp.com/tasks/' + id + '.json', data);
+    request.success(function(task){
+      $('#' + id, '#tasks-table').fadeOut(3000, function(e){
+        $(this).remove();
+      });
+    });
+
+  });
+});
 </script>
 
 </body>
-</html>
 
